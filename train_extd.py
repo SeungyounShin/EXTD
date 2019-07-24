@@ -21,6 +21,9 @@ from EXTD import build_extd
 from layers.modules import MultiBoxLoss
 from data.factory import dataset_factory, detection_collate
 
+from tensorboardX import SummaryWriter
+writer = SummaryWriter()
+
 #os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 
@@ -160,6 +163,11 @@ def train():
                       repr(iteration) + ' || Loss:%.4f' % (tloss))
                 print('->> conf loss:{:.4f} || loc loss:{:.4f}'.format(
                     loss_c.data, loss_l.data))
+
+                writer.add_scalar('loss', tloss, iteration)
+                writer.add_scalar('losses/loss_c', loss_c.data, iteration)
+                writer.add_scalar('losses/loss_l', loss_l.data, iteration)
+
 
             if iteration != 0 and iteration % 5000 == 0:
                 print('Saving state, iter:', iteration)

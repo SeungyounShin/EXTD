@@ -89,7 +89,7 @@ class backbone(nn.Module):
     def forward(self, x):
         for block in self.blocks:
             x = block(x)
-        print(x)
+        # print(x)
         return x
 
 def class_predictor(C_in,filters=2):
