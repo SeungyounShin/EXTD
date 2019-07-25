@@ -65,19 +65,19 @@ class upsample(nn.Module):
 class backbone(nn.Module):
     def __init__(self,filters = 64):
         super(backbone, self).__init__()
-        self.blocks = nn.Sequential(inverted_residual_1(filters,filters).cuda(),
-                                    inverted_residual_2(filters,filters*2,1).cuda(),
-                                    inverted_residual_2(filters,filters*2,1).cuda(),
-                                    inverted_residual_2(filters,filters*2,1).cuda(),
-                                    inverted_residual_2(filters,filters*2,2).cuda())
+        self.blocks = nn.Sequential(inverted_residual_1(filters,filters),
+                                    inverted_residual_2(filters,filters*2,1),
+                                    inverted_residual_2(filters,filters*2,1),
+                                    inverted_residual_2(filters,filters*2,1),
+                                    inverted_residual_2(filters,filters*2,2))
     def forward(self, x):
         return self.blocks(x)
 
 def class_predictor(C_in,filters=2):
-    return nn.Conv2d(C_in,filters,3,1,1).cuda()
+    return nn.Conv2d(C_in,filters,3,1,1)
 
 def bbox_predictor(C_in):
-    return nn.Conv2d(C_in,4,3,1,1).cuda()
+    return nn.Conv2d(C_in,4,3,1,1)
 
 class EXTD(nn.Module):
     def __init__(self,phase):
@@ -93,12 +93,14 @@ class EXTD(nn.Module):
         for i in range(6):
             if(i==5):
                 #maxout
-                cls_pred.append(class_predictor(64,4).cuda())
+                cls_pred.append(class_predictor(64,4))
             else:
-                cls_pred.append(class_predictor(64).cuda())
-            bbox_pred.append(bbox_predictor(64).cuda())
+                cls_pred.append(class_predictor(64))
+            bbox_pred.append(bbox_predictor(64))
         self.cls_pred, self.bbox_pred = nn.ModuleList(cls_pred), nn.ModuleList(bbox_pred)
-
+        if self.phase == 'test':
+            self.detect = Detect(cfg)
+            self.softmax = nn.Softmax(dim=-1)
 
     def forward(self,x):
         size = x.size()[2:]

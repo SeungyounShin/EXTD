@@ -172,13 +172,15 @@ def train():
             if iteration != 0 and iteration % 5000 == 0:
                 print('Saving state, iter:', iteration)
                 file = 'extd_' + args.dataset + '_' + repr(iteration) + '.pth'
-                torch.save(s3fd_net.state_dict(),
+                torch.save(net.state_dict(),
                            os.path.join(args.save_folder, file))
             iteration += 1
 
         val(epoch)
         if iteration == cfg.MAX_STEPS:
             break
+
+        writer.close()
 
 
 def val(epoch):
@@ -211,8 +213,8 @@ def val(epoch):
     global min_loss
     if tloss < min_loss:
         print('Saving best state,epoch', epoch)
-        file = 'sfd_{}.pth'.format(args.dataset)
-        torch.save(s3fd_net.state_dict(), os.path.join(
+        file = 'extd{}.pth'.format(args.dataset)
+        torch.save(extd.state_dict(), os.path.join(
             args.save_folder, file))
         min_loss = tloss
 
