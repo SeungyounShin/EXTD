@@ -5,6 +5,11 @@ https://arxiv.org/pdf/1906.06579.pdf
 
 Dataset : SCUT_HEAD
 
+**implementation**
+1. change data/config files
+2. change minor setting in EXTD
+3. run train.py
+
 + train log
 
 <p align="center">
