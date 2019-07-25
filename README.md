@@ -5,6 +5,11 @@ https://arxiv.org/pdf/1906.06579.pdf
 
 Dataset : SCUT_HEAD
 
+<p align="center">
+  <img width="880" height="400" src="https://github.com/SeungyounShin/EXTD/blob/master/img/overall_framework.png?raw=true
+">
+</p>
+
 ## implementation
 1. change data/config files
 2. change minor setting in EXTD
