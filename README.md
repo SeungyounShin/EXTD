@@ -3,8 +3,9 @@
 
 Dataset : SCUT_HEAD
 
-train result
+train log
 
 
 result
+
 ![텍스트](https://github.com/SeungyounShin/EXTD/blob/master/img/result.png?raw=true) 
