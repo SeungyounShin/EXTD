@@ -1,5 +1,6 @@
 # EXTD
 **Extremely Tiny Face Detector via Iterative Filter Reuse**
+https://arxiv.org/pdf/1906.06579.pdf
 
 Dataset : SCUT_HEAD
 
