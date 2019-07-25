@@ -3,8 +3,6 @@
 
 https://arxiv.org/pdf/1906.06579.pdf
 
-Dataset : SCUT_HEAD
-
 <p align="center">
   <img width="880" height="400" src="https://raw.githubusercontent.com/SeungyounShin/EXTD/master/img/overall_framework.png">
 </p>
@@ -16,6 +14,8 @@ Dataset : SCUT_HEAD
 
 
 ## result
++ Dataset : SCUT_HEAD
+
 + train log
 
 <p align="center">
